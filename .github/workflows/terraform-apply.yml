@@ -23,7 +23,7 @@ jobs:
       - name: Grab backend
         working-directory: terraform
         run: |
-          echo "${{ secrets.TF_BACKEND }}" >> backend.vars
+          echo ${{ secrets.TF_BACKEND }} >> backend.vars
 
       - name: Init
         uses: docker://hashicorp/terraform:1.9.5
