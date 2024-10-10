@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "storage" {
   name                          = "${replace(local.resource_prefix, "-", "")}staticwebsite"
-  resource_group_name           = local.resource_prefix
-  location                      = local.azure_location
+  resource_group_name           = local.resource_group.name
+  location                      = local.resource_group.location
   account_tier                  = "Standard"
   account_replication_type      = "LRS"
   min_tls_version               = "TLS1_2"

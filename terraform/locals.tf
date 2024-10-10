@@ -20,7 +20,7 @@ locals {
     azurerm_storage_account.storage.name : {
       "index.html" : templatefile(
         "${path.module}/wwwroot/index.html.tftpl", {
-          base_url : trim(v, "/")
+          base_url : trim(azurerm_storage_account.storage.primary_web_endpoint, "/")
           title : "RSD Status Page"
         }
       ),
