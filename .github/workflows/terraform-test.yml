@@ -14,17 +14,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check for terraform version mismatch
+        working-directory: terraform
         run: |
           DOTFILE_VERSION=$(cat .terraform-version)
-          TERRAFORM_IMAGE_REFERENCES=$(grep "uses: docker://hashicorp/terraform" .github/workflows/continuous-integration-terraform.yml | grep -v TERRAFORM_IMAGE_REFERENCES | wc -l | tr -d ' ')
-          if [ "$(grep "docker://hashicorp/terraform:${DOTFILE_VERSION}" .github/workflows/continuous-integration-terraform.yml | wc -l | tr -d ' ')" != "$TERRAFORM_IMAGE_REFERENCES" ]
+          TERRAFORM_IMAGE_REFERENCES=$(grep "uses: docker://hashicorp/terraform" .github/workflows/terraform-test.yml | grep -v TERRAFORM_IMAGE_REFERENCES | wc -l | tr -d ' ')
+          if [ "$(grep "docker://hashicorp/terraform:${DOTFILE_VERSION}" .github/workflows/terraform-test.yml | wc -l | tr -d ' ')" != "$TERRAFORM_IMAGE_REFERENCES" ]
           then
-            echo -e "\033[1;31mError: terraform version in .terraform-version file does not match docker://hashicorp/terraform versions in .github/workflows/continuous-integration-terraform.yml"
+            echo -e "\033[1;31mError: terraform version in .terraform-version file does not match docker://hashicorp/terraform versions in .github/workflows/terraform-test.yml"
             exit 1
           fi
 
       - name: Remove azure backend
         run: rm ./backend.tf
+        working-directory: terraform
 
       - name: Run a Terraform init
         uses: docker://hashicorp/terraform:1.9.5
@@ -57,7 +59,7 @@ jobs:
       - name: Generate Terraform docs
         uses: terraform-docs/gh-actions@v1.3.0
         with:
-          working-dir: .
+          working-dir: terraform
           config-file: .terraform-docs.yml
           output-file: README.md
           output-method: inject
@@ -76,6 +78,7 @@ jobs:
           tflint_version: v0.44.1
 
       - name: Run TFLint
+        working-directory: terraform
         run: tflint -f compact
 
   tfsec-pr-commenter:
@@ -88,4 +91,5 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
+          working_directory: terraform
           github_token: ${{ github.token }}
