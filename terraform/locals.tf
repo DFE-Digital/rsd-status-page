@@ -18,6 +18,10 @@ locals {
   }
 
   allowed_files = [for file in fileset("${local.root_path}/wwwroot/", "**") : file if(!contains(keys(local.templates), file))]
+  endpoints = [for label, endpoint in var.endpoints : <<DOC
+    { label: "${label}", endpoint: "${endpoint}" }
+  DOC
+  ]
 
   templates = {
     "index.html.tftpl" : templatefile(
@@ -31,7 +35,7 @@ locals {
       "const endpoints = [];",
       <<DOC
       const endpoints = [
-        ${join(",", var.endpoints)}
+        ${join(",", local.endpoints)}
       ];
       DOC
     )

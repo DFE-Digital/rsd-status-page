@@ -48,7 +48,7 @@ variable "existing_resource_group" {
 
 variable "endpoints" {
   description = "List of endpoints that you want the app to poll for health insights"
-  type        = list(string)
-  default     = []
+  type        = map(string)
+  default     = {}
   sensitive   = true
 }
