@@ -20,7 +20,7 @@ locals {
   allowed_files = [for file in fileset("${local.root_path}/wwwroot/", "**") : file if(!contains(keys(local.templates), file))]
 
   templates = {
-    "index.html" : templatefile(
+    "index.html.tftpl" : templatefile(
       "${local.root_path}/wwwroot/index.html.tftpl", {
         base_url : trim(azurerm_storage_account.storage.primary_web_endpoint, "/")
         title : "RSD Status Page"

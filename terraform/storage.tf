@@ -50,7 +50,7 @@ resource "azapi_update_resource" "storage_key_rotation_reminder" {
 }
 
 resource "azurerm_storage_blob" "web" {
-  for_each = local.allowed_files
+  for_each = toset(local.allowed_files)
 
   name                   = each.value
   storage_account_name   = azurerm_storage_account.storage.name
@@ -65,7 +65,7 @@ resource "azurerm_storage_blob" "web" {
 resource "azurerm_storage_blob" "templates" {
   for_each = local.templates
 
-  name                   = each.key
+  name                   = each.key == "index.html.tftpl" ? "index.html" : each.key
   storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = "$web"
   type                   = "Block"
