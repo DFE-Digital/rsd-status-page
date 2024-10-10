@@ -30,21 +30,6 @@ jobs:
         run: |
           echo '${{ secrets.TF_BACKEND }}' >> backend.vars
 
-      - name: Init
-        uses: docker://hashicorp/terraform:1.9.5
-        with:
-          entrypoint: terraform
-          args: -chdir=terraform init -backend-config=backend.vars -input=false
-
-      - name: Plan
-        uses: docker://hashicorp/terraform:1.9.5
-        env:
-          TF_VAR_azure_client_id: ${{ secrets.TF_AZURE_CLIENT_ID }}
-          TF_VAR_azure_client_secret: ${{ secrets.TF_AZURE_CLIENT_SECRET }}
-        with:
-          entrypoint: terraform
-          args: -chdir=terraform plan -out=tfplan -input=false
-
       - name: Unlock state container
         uses: azure/cli@v2
         with:
@@ -69,6 +54,21 @@ jobs:
 
               sleep 10
             done
+
+      - name: Init
+        uses: docker://hashicorp/terraform:1.9.5
+        with:
+          entrypoint: terraform
+          args: -chdir=terraform init -backend-config=backend.vars -input=false
+
+      - name: Plan
+        uses: docker://hashicorp/terraform:1.9.5
+        env:
+          TF_VAR_azure_client_id: ${{ secrets.TF_AZURE_CLIENT_ID }}
+          TF_VAR_azure_client_secret: ${{ secrets.TF_AZURE_CLIENT_SECRET }}
+        with:
+          entrypoint: terraform
+          args: -chdir=terraform plan -out=tfplan -input=false
 
       - name: Apply
         uses: docker://hashicorp/terraform:1.9.5
