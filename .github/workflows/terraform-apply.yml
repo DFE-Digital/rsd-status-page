@@ -38,9 +38,8 @@ jobs:
             az storage account update \
               --resource-group "${{ secrets.TF_STATE_RG }}" \
               --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
-              --default-action Allow
-
-            sleep 10
+              --default-action Allow \
+              --output none
 
             until [[
               $ACTION == 'Allow'
@@ -60,6 +59,12 @@ jobs:
         with:
           entrypoint: terraform
           args: -chdir=terraform init -backend-config=backend.vars -input=false
+
+      - name: Set workspace
+        uses: docker://hashicorp/terraform:1.9.5
+        with:
+          entrypoint: terraform
+          args: -chdir=terraform workspace select Prod
 
       - name: Plan
         uses: docker://hashicorp/terraform:1.9.5
@@ -87,14 +92,13 @@ jobs:
             az storage account update \
               --resource-group "${{ secrets.TF_STATE_RG }}" \
               --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
-              --default-action Deny
-
-            sleep 10
+              --default-action Deny \
+              --output none
 
             until [[
               $ACTION == 'Deny'
-              ]]
-              do
+            ]]
+            do
               ACTION=$(az storage account show \
                 --resource-group "${{ secrets.TF_STATE_RG }}" \
                 --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
