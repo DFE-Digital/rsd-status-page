@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="${base_url}/govuk-frontend.min.css">
+  <link rel="manifest" href="${base_url}/assets/manifest.json">
+  <title>${title}</title>
+  <style>
+    .govuk-tag {
+      width: 2rem;
+      height: 2rem;
+      display: inline-block;
+      text-align: center;
+      line-height: 2rem;
+      padding: 0;
+      margin-left: 0.2rem;
+      font-family: monospace;
+      font-size: 0rem;
+    }
+
+    .govuk-table {
+      opacity: 0.2;
+      transition: opacity 1s;
+    }
+
+    .good {
+      background-color: #00703c;
+    }
+    .bad {
+      background-color: #d4351c
+    }
+  </style>
+</head>
+<body class="govuk-template__body">
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column">
+          <h1 class="govuk-heading-xl">RSD Service Status</h1>
+          <p class="govuk-body">This webapp will display the latest uptime results for services hosted in RSD and will auto-refresh every <span id="waitTime">0</span> minutes</p>
+          <div id="waitContainer" class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+              <span class="govuk-visually-hidden">Warning</span>
+              <span id="wait">Loading new data. Please wait...</span>
+              <span id="lastModifiedTime"></span>
+            </strong>
+          </div>
+          <table class="govuk-table" id="resultTable">
+            <caption class="govuk-table__caption govuk-table__caption--s">Services</caption>
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header govuk-!-width-two-thirds">Name</th>
+                <th scope="col" class="govuk-table__header govuk-table__header--numeric">Last 3 tests</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body" id="resultBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+  <script type="module" src="${base_url}/assets/javascripts/govuk-frontend.min.js"></script>
+  <script type="module">
+    import { initAll } from '${base_url}/assets/javascripts/govuk-frontend.min.js'
+    initAll()
+  </script>
+  <script src="${base_url}/assets/javascripts/app.js"></script>
+</body>
+</html>
