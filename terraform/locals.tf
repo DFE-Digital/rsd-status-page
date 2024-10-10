@@ -17,7 +17,7 @@ locals {
     woff2 = "font/woff2"
   }
 
-  allowed_files = [ for file in fileset("${local.root_path}/wwwroot/", "**") : if (!contains(keys(local.templates), file)) ]
+  allowed_files = [for file in fileset("${local.root_path}/wwwroot/", "**") : file if(!contains(keys(local.templates), file))]
 
   templates = {
     "index.html" : templatefile(
