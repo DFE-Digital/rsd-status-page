@@ -73,7 +73,11 @@ function run() {
 
   let queue = [];
   endpoints.forEach((value, index) => {
-    queue.push(GET(value.label, value.endpoint))
+    endpoint = new URL(value.endpoint);
+
+    if (endpoint) { // Test if valid URI
+      queue.push(GET(value.label, value.endpoint))
+    }
   });
 
   Promise.all(queue).then(() => {

@@ -58,6 +58,7 @@ jobs:
         env:
           TF_VAR_azure_client_id: ${{ secrets.TF_AZURE_CLIENT_ID }}
           TF_VAR_azure_client_secret: ${{ secrets.TF_AZURE_CLIENT_SECRET }}
+          TF_VAR_endpoints: ${{ secrets.TF_TARGET_ENDPOINTS }}
         with:
           entrypoint: terraform
           args: -chdir=terraform plan -out=tfplan -input=false
@@ -67,6 +68,7 @@ jobs:
         env:
           TF_VAR_azure_client_id: ${{ secrets.TF_AZURE_CLIENT_ID }}
           TF_VAR_azure_client_secret: ${{ secrets.TF_AZURE_CLIENT_SECRET }}
+          TF_VAR_endpoints: ${{ secrets.TF_TARGET_ENDPOINTS }}
         with:
           entrypoint: terraform
           args: -chdir=terraform apply -input=false tfplan
