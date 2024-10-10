@@ -50,7 +50,7 @@ resource "azapi_update_resource" "storage_key_rotation_reminder" {
 }
 
 resource "azurerm_storage_blob" "web" {
-  for_each = fileset("${local.root_path}/wwwroot/", "**")
+  for_each = local.allowed_files
 
   name                   = each.value
   storage_account_name   = azurerm_storage_account.storage.name
@@ -62,14 +62,16 @@ resource "azurerm_storage_blob" "web" {
   access_tier            = "Cool"
 }
 
-resource "azurerm_storage_blob" "index" {
-  for_each = local.web_pages
+resource "azurerm_storage_blob" "templates" {
+  for_each = local.templates
 
-  name                   = keys(each.value)[0]
-  storage_account_name   = each.key
+  name                   = each.key
+  storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = "$web"
   type                   = "Block"
-  source_content         = each.value[keys(each.value)[0]]
+  source_content         = each.value
   content_type           = "text/html"
   access_tier            = "Cool"
+
+  depends_on = [azurerm_storage_blob.web]
 }

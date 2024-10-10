@@ -1,4 +1,4 @@
-const endpoints = []
+const endpoints = [];
 
 const secondsToWait = 300;
 
