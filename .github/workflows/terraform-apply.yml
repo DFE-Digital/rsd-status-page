@@ -20,6 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.TF_AZURE_CREDENTIALS }}
+
       - name: Grab backend
         working-directory: terraform
         run: |
@@ -29,7 +34,7 @@ jobs:
         uses: docker://hashicorp/terraform:1.9.5
         with:
           entrypoint: terraform
-          args: -chdir=terraform init -backend-config=backend.vars
+          args: -chdir=terraform init -backend-config=backend.vars -input=false
 
       - name: Plan
         uses: docker://hashicorp/terraform:1.9.5
@@ -38,7 +43,32 @@ jobs:
           TF_VAR_azure_client_secret: ${{ secrets.TF_AZURE_CLIENT_SECRET }}
         with:
           entrypoint: terraform
-          args: -chdir=terraform plan
+          args: -chdir=terraform plan -out=tfplan -input=false
+
+      - name: Unlock state container
+        uses: azure/cli@v2
+        with:
+          azcliversion: 2.64.0
+          inlineScript: |
+            az storage account update \
+              --resource-group "${{ secrets.TF_STATE_RG }}" \
+              --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
+              --default-action Allow
+
+            sleep 10
+
+            until [[
+              $ACTION == 'Allow'
+            ]]
+            do
+              ACTION=$(az storage account show \
+                --resource-group "${{ secrets.TF_STATE_RG }}" \
+                --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
+                --query networkRuleSet.defaultAction \
+                --output tsv)
+
+              sleep 10
+            done
 
       - name: Apply
         uses: docker://hashicorp/terraform:1.9.5
@@ -47,4 +77,28 @@ jobs:
           TF_VAR_azure_client_secret: ${{ secrets.TF_AZURE_CLIENT_SECRET }}
         with:
           entrypoint: terraform
-          args: -chdir=terraform apply
+          args: -chdir=terraform apply -input=false tfplan
+
+      - name: Lock state container
+        uses: azure/cli@v2
+        with:
+          azcliversion: 2.64.0
+          inlineScript: |
+            az storage account update \
+              --resource-group "${{ secrets.TF_STATE_RG }}" \
+              --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
+              --default-action Deny
+
+            sleep 10
+
+            until [[
+              $ACTION == 'Deny'
+              ]]
+              do
+              ACTION=$(az storage account show \
+                --resource-group "${{ secrets.TF_STATE_RG }}" \
+                --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
+                --query networkRuleSet.defaultAction \
+                --output tsv)
+              sleep 10
+            done
