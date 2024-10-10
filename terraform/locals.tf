@@ -18,7 +18,7 @@ locals {
   }
 
   web_pages = {
-    "${azurerm_storage_account.storage.name}" : {
+    (azurerm_storage_account.storage.name) : {
       "index.html" : templatefile(
         "${local.root_path}/wwwroot/index.html.tftpl", {
           base_url : trim(azurerm_storage_account.storage.primary_web_endpoint, "/")
