@@ -135,6 +135,7 @@ If everything looks good, answer `yes` and wait for the new infrastructure to be
 |------|---------|
 | <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.15.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.4.0 |
+| <a name="provider_local"></a> [local](#provider\_local) | 2.5.2 |
 
 ## Modules
 
@@ -150,6 +151,7 @@ No modules.
 | [azurerm_storage_blob.templates](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_storage_blob.web](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_resource_group.existing_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
+| [local_file.appjs](https://registry.terraform.io/providers/hashicorp/local/2.5.2/docs/data-sources/file) | data source |
 
 ## Inputs
 

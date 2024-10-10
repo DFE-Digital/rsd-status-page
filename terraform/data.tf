@@ -3,3 +3,7 @@ data "azurerm_resource_group" "existing_resource_group" {
 
   name = local.existing_resource_group
 }
+
+data "local_file" "appjs" {
+  filename = "${local.root_path}/wwwroot/assets/javascripts/app.js"
+}
