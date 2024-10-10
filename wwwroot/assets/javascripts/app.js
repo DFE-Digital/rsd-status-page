@@ -81,7 +81,7 @@ function run() {
     const date = new Date();
     lastModified.textContent = "Last updated: " + date.getDate() +
       "/" +
-      date.getMonth() +
+      (date.getMonth() + 1) + // Zero indexed months
       "/" +
       date.getFullYear() +
       " " +
