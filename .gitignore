@@ -1,0 +1,15 @@
+### Terraform
+.terraformrc*
+terraform.rc*
+*.tfstate*
+*.tfvars*
+!terraform.tfvars.example
+!terraform.tfvars
+.terraform/
+backend.vars
+
+### Web
+node_modules
+
+### General
+.DS_Store
