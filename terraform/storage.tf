@@ -70,6 +70,7 @@ resource "azurerm_storage_blob" "templates" {
   storage_container_name = "$web"
   type                   = "Block"
   source_content         = each.value
+  content_md5            = md5(each.value)
   content_type           = "text/html"
   access_tier            = "Cool"
 
