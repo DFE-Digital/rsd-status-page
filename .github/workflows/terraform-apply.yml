@@ -39,20 +39,7 @@ jobs:
               --resource-group "${{ secrets.TF_STATE_RG }}" \
               --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
               --default-action Allow \
-              --output none
-
-            until [[
-              $ACTION == 'Allow'
-            ]]
-            do
-              ACTION=$(az storage account show \
-                --resource-group "${{ secrets.TF_STATE_RG }}" \
-                --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
-                --query networkRuleSet.defaultAction \
-                --output tsv)
-
-              sleep 10
-            done
+              --output none && echo "[i] Waiting 30s for network ACLs to update" && sleep 30
 
       - name: Init
         uses: docker://hashicorp/terraform:1.9.5
@@ -94,16 +81,4 @@ jobs:
               --resource-group "${{ secrets.TF_STATE_RG }}" \
               --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
               --default-action Deny \
-              --output none
-
-            until [[
-              $ACTION == 'Deny'
-            ]]
-            do
-              ACTION=$(az storage account show \
-                --resource-group "${{ secrets.TF_STATE_RG }}" \
-                --name "${{ secrets.TF_STATE_STORAGE_ACCOUNT_NAME }}" \
-                --query networkRuleSet.defaultAction \
-                --output tsv)
-              sleep 10
-            done
+              --output none && echo "[i] Waiting 30s for network ACLs to update" && sleep 30
