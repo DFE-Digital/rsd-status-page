@@ -85,6 +85,7 @@ jobs:
           args: -chdir=terraform apply -input=false tfplan
 
       - name: Lock state container
+        if: always()
         uses: azure/cli@v2
         with:
           azcliversion: 2.64.0
