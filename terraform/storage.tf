@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "storage" {
-  name                          = "${replace(local.resource_prefix, "-", "")}staticwebsite"
+  name                          = replace(local.resource_prefix, "-", "")
   resource_group_name           = local.resource_group.name
   location                      = local.resource_group.location
   account_tier                  = "Standard"
@@ -8,7 +8,9 @@ resource "azurerm_storage_account" "storage" {
   https_traffic_only_enabled    = true
   public_network_access_enabled = true
 
-  static_website {}
+  static_website {
+    index_document = "index.html"
+  }
 
   blob_properties {
     cors_rule {
@@ -48,14 +50,14 @@ resource "azapi_update_resource" "storage_key_rotation_reminder" {
 }
 
 resource "azurerm_storage_blob" "web" {
-  for_each = fileset("${path.module}/wwwroot/", "**")
+  for_each = fileset("${local.root_path}/wwwroot/", "**")
 
   name                   = each.value
   storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "${path.module}/wwwroot/${each.value}"
-  content_md5            = filemd5("${path.module}/wwwroot/${each.value}")
+  source                 = "${local.root_path}/wwwroot/${each.value}"
+  content_md5            = filemd5("${local.root_path}/wwwroot/${each.value}")
   content_type           = lookup(local.content_types, element(split(".", each.value), length(split(".", each.value)) - 1), null)
   access_tier            = "Cool"
 }

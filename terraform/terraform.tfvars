@@ -2,7 +2,7 @@ azure_subscription_id = "e8bc9314-d27f-403a-bbe0-6b189d2efad2"
 azure_tenant_id       = "9c7d9dd3-840c-4b3f-818e-552865082e16"
 
 environment    = "s184p01-"
-project_name   = "status-page"
+project_name   = "rsd-status-page"
 azure_location = "westeurope"
 
 tags = {
