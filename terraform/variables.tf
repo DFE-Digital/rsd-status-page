@@ -46,9 +46,11 @@ variable "existing_resource_group" {
   default     = ""
 }
 
-variable "endpoints" {
-  description = "List of endpoints that you want the app to poll for health insights"
-  type        = map(string)
-  default     = {}
-  sensitive   = true
+variable "function_apps" {
+  description = "List of function app names and resource groups, keyed by a label, that you want the app to poll for health insights"
+  type = map(object({
+    name : string
+    resource_group_name : string
+  }))
+  default = {}
 }
