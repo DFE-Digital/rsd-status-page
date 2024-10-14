@@ -5,7 +5,12 @@ environment    = "s184p01-"
 project_name   = "rsd-status-page"
 azure_location = "westeurope"
 
-function_apps = {}
+function_apps = {
+  "Apply to Become": {
+    name: "s184p01-a2bext-health-api"
+    resource_group_name: "s184p01-a2bext"
+  }
+}
 
 tags = {
   "Environment"      = "Prod"
