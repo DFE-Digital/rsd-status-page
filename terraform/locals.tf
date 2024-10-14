@@ -18,11 +18,6 @@ locals {
   }
 
   allowed_files = [for file in fileset("${local.root_path}/wwwroot/", "**") : file if(!contains(keys(local.templates), file))]
-  endpoints = [for label, endpoint in var.endpoints : <<DOC
-    { label: "${label}", endpoint: "${endpoint}" }
-  DOC
-  ]
-
   templates = {
     "index.html.tftpl" : templatefile(
       "${local.root_path}/wwwroot/index.html.tftpl", {
@@ -39,6 +34,16 @@ locals {
       ];
       DOC
     )
+  }
+  endpoints = [for label, endpoint in local.function_app_endpoints : <<DOC
+    { label: "${label}", endpoint: "${endpoint}" }
+  DOC
+  ]
+
+  function_apps = var.function_apps
+  function_app_endpoints = {
+    for label, function_name in local.function_apps :
+    label => "https://${data.azurerm_linux_function_app.functions[function_name].default_hostname}/api/http_trigger?code=${jsondecode(data.azapi_resource_action.function_key[function_name].output).default}"
   }
 
   tags = var.tags

@@ -5,6 +5,8 @@ environment    = "s184p01-"
 project_name   = "rsd-status-page"
 azure_location = "westeurope"
 
+function_apps = {}
+
 tags = {
   "Environment"      = "Prod"
   "Product"          = "Complete Conversions, Transfers and Changes"
