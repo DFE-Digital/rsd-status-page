@@ -22,9 +22,13 @@ function_apps = {
     name : "s184p01-mfsp-health-api"
     resource_group_name : "s184p01-mfsp"
   }
-  "Complete Conversions Transfers and Chanes" : {
+  "Complete Conversions Transfers and Changes" : {
     name : "s184p01-comp-health-api"
     resource_group_name : "s184p01-comp"
+  }
+  "Academies API" : {
+    name : "s184p01-tramsapi-health-api"
+    resource_group_name : "s184p01-tramsapi"
   }
 }
 
