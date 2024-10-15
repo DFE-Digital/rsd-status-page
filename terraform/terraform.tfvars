@@ -18,6 +18,10 @@ function_apps = {
     name: "s184p01-amsd-health-api"
     resource_group_name: "s184p01-amsd"
   }
+  "Manage Free School Projects": {
+    name: "s184p01-mfsp-health-api"
+    resource_group_name: "s184p01-mfsp"
+  }
 }
 
 tags = {
