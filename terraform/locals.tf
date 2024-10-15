@@ -42,8 +42,8 @@ locals {
 
   function_apps = var.function_apps
   function_app_endpoints = {
-    for label, function_name in local.function_apps :
-    label => "https://${data.azurerm_linux_function_app.functions[function_name].default_hostname}/api/http_trigger?code=${jsondecode(data.azapi_resource_action.function_key[function_name].output).default}"
+    for label, function in local.function_apps :
+    label => "https://${data.azurerm_linux_function_app.functions[label].default_hostname}/api/http_trigger?code=${data.azurerm_function_app_host_keys.function_key[label].default_function_key}"
   }
 
   tags = var.tags
