@@ -22,6 +22,10 @@ function_apps = {
     name: "s184p01-mfsp-health-api"
     resource_group_name: "s184p01-mfsp"
   }
+  "Complete Conversions Transfers and Chanes": {
+    name: "s184p01-comp-health-api"
+    resource_group_name: "s184p01-comp"
+  }
 }
 
 tags = {
