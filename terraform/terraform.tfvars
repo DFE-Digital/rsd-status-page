@@ -5,7 +5,28 @@ environment    = "s184p01-"
 project_name   = "rsd-status-page"
 azure_location = "westeurope"
 
-function_apps = {}
+function_apps = {
+  "Apply to Become": {
+    name: "s184p01-a2bext-health-api"
+    resource_group_name: "s184p01-a2bext"
+  }
+  "Find Information about Academies and Trusts": {
+    name: "s184p01-fiat-health-api"
+    resource_group_name: "s184p01-fiat"
+  }
+  "Record Concerns and Support Trusts": {
+    name: "s184p01-amsd-health-api"
+    resource_group_name: "s184p01-amsd"
+  }
+  "Manage Free School Projects": {
+    name: "s184p01-mfsp-health-api"
+    resource_group_name: "s184p01-mfsp"
+  }
+  "Complete Conversions Transfers and Chanes": {
+    name: "s184p01-comp-health-api"
+    resource_group_name: "s184p01-comp"
+  }
+}
 
 tags = {
   "Environment"      = "Prod"
