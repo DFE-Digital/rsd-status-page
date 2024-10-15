@@ -30,6 +30,10 @@ function_apps = {
     name : "s184p01-tramsapi-health-api"
     resource_group_name : "s184p01-tramsapi"
   }
+  "Academisation API" : {
+    name : "s184p01-aca-health-api"
+    resource_group_name : "s184p01-aca"
+  }
   "Prepare Conversions and Transfers" : {
     name : "s184p01-a2bint-health-api"
     resource_group_name : "s184p01-a2bint"
