@@ -10,6 +10,10 @@ function_apps = {
     name: "s184p01-a2bext-health-api"
     resource_group_name: "s184p01-a2bext"
   }
+  "Find Information about Academies and Trusts": {
+    name: "s184p01-fiat-health-api"
+    resource_group_name: "s184p01-fiat"
+  }
 }
 
 tags = {
