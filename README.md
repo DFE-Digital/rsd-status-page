@@ -16,16 +16,15 @@ Azure infrastructure is deployed into the 's184-RSD-Production' subscription onl
 
 ## Modifying API calls
 
-There is a Terraform variable called 'endpoints' which is populated by a GitHub
-secret called 'TF_TARGET_ENDPOINTS'.
+There is a Terraform variable called 'function_apps' which is populated in the
+`terraform.tfvars` file.
 
-Populate the secret as a JSON string like such:
+Simply add the name and resource group of an existing Function App* keyed by a
+label and Terraform will attempt to locate and generate a secure url, and add it
+to the 'app.js' file.
 
-```json
-{
-  "My-Azure-Function"                              = "https://xxx.azurewebsites.net/api/http_trigger?code=xxx"
-}
-```
+*Function Apps must exist in the same Tenant / Subscription as the authenticated
+Terraform user
 
 ## Build
 
