@@ -14,6 +14,10 @@ function_apps = {
     name: "s184p01-fiat-health-api"
     resource_group_name: "s184p01-fiat"
   }
+  "Record Concerns and Support Trusts": {
+    name: "s184p01-amsd-health-api"
+    resource_group_name: "s184p01-amsd"
+  }
 }
 
 tags = {
