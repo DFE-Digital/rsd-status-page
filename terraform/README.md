@@ -150,7 +150,7 @@ No modules.
 | [azurerm_storage_account.storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_blob.templates](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_storage_blob.web](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
-| [azapi_resource_action.function_key](https://registry.terraform.io/providers/Azure/azapi/latest/docs/data-sources/resource_action) | data source |
+| [azurerm_function_app_host_keys.function_key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/function_app_host_keys) | data source |
 | [azurerm_linux_function_app.functions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/linux_function_app) | data source |
 | [azurerm_resource_group.existing_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
 | [local_file.appjs](https://registry.terraform.io/providers/hashicorp/local/2.5.2/docs/data-sources/file) | data source |

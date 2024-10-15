@@ -15,11 +15,9 @@ data "azurerm_linux_function_app" "functions" {
   resource_group_name = each.value.resource_group_name
 }
 
-data "azapi_resource_action" "function_key" {
-  for_each = data.azurerm_linux_function_app.functions
+data "azurerm_function_app_host_keys" "function_key" {
+  for_each = local.function_apps
 
-  type                   = "Microsoft.Web/sites/functions@2023-01-01"
-  action                 = "listkeys"
-  resource_id            = each.value.id
-  response_export_values = ["default"]
+  name                = each.value.name
+  resource_group_name = each.value.resource_group_name
 }
