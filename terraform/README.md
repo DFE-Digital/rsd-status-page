@@ -128,6 +128,7 @@ If everything looks good, answer `yes` and wait for the new infrastructure to be
 | <a name="requirement_azapi"></a> [azapi](#requirement\_azapi) | >= 1.13.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.51.0 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | 2.5.2 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.6.3 |
 
 ## Providers
 
@@ -136,6 +137,7 @@ If everything looks good, answer `yes` and wait for the new infrastructure to be
 | <a name="provider_azapi"></a> [azapi](#provider\_azapi) | 1.15.0 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.4.0 |
 | <a name="provider_local"></a> [local](#provider\_local) | 2.5.2 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
 
 ## Modules
 
@@ -150,6 +152,7 @@ No modules.
 | [azurerm_storage_account.storage](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account) | resource |
 | [azurerm_storage_blob.templates](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
 | [azurerm_storage_blob.web](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_blob) | resource |
+| [random_id.version_tag](https://registry.terraform.io/providers/hashicorp/random/3.6.3/docs/resources/id) | resource |
 | [azurerm_function_app_host_keys.function_key](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/function_app_host_keys) | data source |
 | [azurerm_linux_function_app.functions](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/linux_function_app) | data source |
 | [azurerm_resource_group.existing_resource_group](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |

@@ -22,6 +22,7 @@ locals {
     "index.html.tftpl" : templatefile(
       "${local.root_path}/wwwroot/index.html.tftpl", {
         base_url : trim(azurerm_storage_account.storage.primary_web_endpoint, "/")
+        version_tag : random_id.version_tag.b64_url
         title : "RSD Status Page"
       }
     ),

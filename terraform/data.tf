@@ -21,3 +21,12 @@ data "azurerm_function_app_host_keys" "function_key" {
   name                = each.value.name
   resource_group_name = each.value.resource_group_name
 }
+
+resource "random_id" "version_tag" {
+  keepers = {
+    # Generate a new id each time the md5 of the js changes
+    hash = data.local_file.appjs.content_md5
+  }
+
+  byte_length = 8
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="${base_url}/govuk-frontend.min.css">
+  <link rel="stylesheet" href="${base_url}/govuk-frontend.min.css?v${version_tag}">
   <link rel="manifest" href="${base_url}/assets/manifest.json">
   <title>${title}</title>
   <style>
@@ -63,11 +63,11 @@
   </div>
 
   <script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
-  <script type="module" src="${base_url}/assets/javascripts/govuk-frontend.min.js"></script>
+  <script type="module" src="${base_url}/assets/javascripts/govuk-frontend.min.js?v=${version_tag}"></script>
   <script type="module">
-    import { initAll } from '${base_url}/assets/javascripts/govuk-frontend.min.js'
+    import { initAll } from '${base_url}/assets/javascripts/govuk-frontend.min.js?v=${version_tag}'
     initAll()
   </script>
-  <script src="${base_url}/assets/javascripts/app.js"></script>
+  <script src="${base_url}/assets/javascripts/app.js?v=${version_tag}"></script>
 </body>
 </html>
