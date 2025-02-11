@@ -30,6 +30,10 @@ function_apps = {
     name : "s184p01-tramsapi-health-api"
     resource_group_name : "s184p01-tramsapi"
   }
+  "Persons API" : {
+    name : "s184p01-prsnsapi-health-api"
+    resource_group_name : "s184p01-tramsapi"
+  }
   "Academisation API" : {
     name : "s184p01-aca-health-api"
     resource_group_name : "s184p01-aca"
@@ -42,8 +46,8 @@ function_apps = {
 
 tags = {
   "Environment"      = "Prod"
-  "Product"          = "Complete Conversions, Transfers and Changes"
-  "Service Offering" = "Complete Conversions, Transfers and Changes"
+  "Product"          = "RSD Core Infrastructure"
+  "Service Offering" = "SIP - Academies and Free Schools Systems Integration Programme"
   "GitHub"           = "rsd-status-page"
   "Service Name"     = "RSD Status Page"
 }
