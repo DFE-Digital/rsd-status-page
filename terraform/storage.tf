@@ -8,10 +8,6 @@ resource "azurerm_storage_account" "storage" {
   https_traffic_only_enabled    = true
   public_network_access_enabled = true
 
-  static_website {
-    index_document = "index.html"
-  }
-
   blob_properties {
     cors_rule {
       allowed_headers    = ["*"]
@@ -37,16 +33,21 @@ resource "azurerm_storage_account" "storage" {
   tags = local.tags
 }
 
+resource "azurerm_storage_account_static_website" "storage" {
+  storage_account_id = azurerm_storage_account.storage.id
+  index_document     = "index.html"
+}
+
 resource "azapi_update_resource" "storage_key_rotation_reminder" {
   type        = "Microsoft.Storage/storageAccounts@2023-01-01"
   resource_id = azurerm_storage_account.storage.id
-  body = jsonencode({
+  body = {
     properties = {
       keyPolicy : {
         keyExpirationPeriodInDays : 90
       }
     }
-  })
+  }
 }
 
 resource "azurerm_storage_blob" "web" {
