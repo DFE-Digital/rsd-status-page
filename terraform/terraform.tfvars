@@ -22,8 +22,12 @@ function_apps = {
     name : "s184p01-mfsp-health-api"
     resource_group_name : "s184p01-mfsp"
   }
-  "Complete Conversions Transfers and Changes" : {
+  "Complete Conversions Transfers and Changes (Ruby)" : {
     name : "s184p01-comp-health-api"
+    resource_group_name : "s184p01-comp"
+  }
+  "Complete Conversions Transfers and Changes (.NET)" : {
+    name : "s184p01-compdotnet-health-api"
     resource_group_name : "s184p01-comp"
   }
   "Academies API" : {
